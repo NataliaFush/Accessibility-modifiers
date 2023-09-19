@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace User
+namespace Core.Enums
 {
-    internal struct Address
+    public enum UserType
     {
-        public string City;
-        public string Street;
-        public int House;
-
+        Admin,
+        Customer,
+        Manager
     }
 }

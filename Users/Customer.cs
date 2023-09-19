@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace User
 {
-    internal class Customer : UserBase
+    public class Customer : UserBase
     {
         public Customer(string firstName, string lastName) : base(firstName, lastName, UserType.Customer)
         {

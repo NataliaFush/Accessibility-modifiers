@@ -1,21 +1,19 @@
-﻿using System;
+﻿using Core.Extension;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Goods
+namespace Core.Entities
 {
     public class Order : OrderBase
     {
-        public Order() : base(10, 20, 30)
-        {
-
-        }
+        public Order(ICustomer customer) : base(10, 20, 30, customer) { }
 
         public int GetBirthDayDiiscount(DateTime UserBirthDay)
         {
-            if (UserBirthDay == base.DateOfOrder) 
+            if (UserBirthDay.EquilBirthDay(base.CreateOrder))
             {
                 return _discountBithDay;
             }
@@ -32,6 +30,7 @@ namespace Goods
         public override double GetTotalPrice()
         {
             var totalPrice = Price;
+            totalPrice -= GetDiscount(totalPrice) * totalPrice / 100 - GetBirthDayDiiscount(Customer.BirthDay) * totalPrice / 100;
             return totalPrice;
         }
     }
