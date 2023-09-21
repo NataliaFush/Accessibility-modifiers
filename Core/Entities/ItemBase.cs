@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Core.Entities
 {
-    public abstract class ItemBase : IItemBase
+    public abstract class ItemBase : IItem
     {
         public int Id { get; set; }
         public string ItemName { get; set; }
@@ -15,9 +15,5 @@ namespace Core.Entities
         public uint Price { get; set; }
         public List<Discount> Discounts { get; set; }
         public string Unit { get; set; }
-        public double GetTotalPrice()
-        {
-            return 0;
-        }
     }
 }

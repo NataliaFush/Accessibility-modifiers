@@ -10,7 +10,6 @@ namespace Core.Enums
     {
         None,
         Item,
-        Order,
         OrderPrice,
         Selebrate,
         Date,
