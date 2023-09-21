@@ -25,7 +25,7 @@ namespace Core.Entities
         }
 
         public long FinalPrice;
-        public int OrderId;
+        public int Id { get; set; }
         public List<ItemBase> Items { get; set; }
         public string CustomerId;
         public ICustomer Customer { get; set; }

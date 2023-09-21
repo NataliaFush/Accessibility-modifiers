@@ -1,8 +1,10 @@
-﻿namespace Core
+﻿using Core.Entities;
+
+namespace Core
 {
     public interface IItemBase
     {
-        uint Discount { get; set; }
+        List<Discount> Discounts { get; set; }
         int Id { get; set; }
         string ItemName { get; set; }
         uint Price { get; set; }
