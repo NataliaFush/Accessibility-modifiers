@@ -9,12 +9,11 @@ namespace Core.Entities
 {
     public class Customer : UserBase, ICustomer
     {
-        public Customer(string firstName, string lastName) : base(firstName, lastName, UserType.Customer)
+        public Customer() : base(UserType.Customer)
         {
         }
 
-        public ICollection<IOrderBase> Orders { get ; set ; }
+        public ICollection<IOrder> Orders { get ; set ; }
         public Address DeliveryAddress { get ; set; }
-        public int Discount { get; set; }
     }
 }

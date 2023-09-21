@@ -5,7 +5,9 @@ VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Accessibility modifiers", "Accessibility modifiers\Accessibility modifiers.csproj", "{A242255D-69DC-43D4-B226-FE2BDC7EE306}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{101E8851-63E6-4443-9C12-7079C17FF51C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{101E8851-63E6-4443-9C12-7079C17FF51C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBase", "DataBase\DataBase.csproj", "{CE4173F5-B669-4D2D-9A97-342689ECBFFC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{101E8851-63E6-4443-9C12-7079C17FF51C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{101E8851-63E6-4443-9C12-7079C17FF51C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{101E8851-63E6-4443-9C12-7079C17FF51C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE4173F5-B669-4D2D-9A97-342689ECBFFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE4173F5-B669-4D2D-9A97-342689ECBFFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE4173F5-B669-4D2D-9A97-342689ECBFFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE4173F5-B669-4D2D-9A97-342689ECBFFC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

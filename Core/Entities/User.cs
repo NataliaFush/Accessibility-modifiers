@@ -10,20 +10,18 @@ namespace Core.Entities
 {
     public abstract class UserBase
     {
-        private string lastName;
-        private string firstName;
         public int Id { get; set; }
+        public string LastName { get; set; }
+        public string FirstName { get; set; }
         public UserType UserType { get; }
         public DateTime BirthDay { get; set; }
 
-        protected UserBase(string firstName, string lastName, UserType userType)
+        protected UserBase( UserType userType)
         {
-            this.firstName = firstName;
-            this.lastName = lastName;
             this.UserType = userType;
         }
 
-        public string FullName { get { return firstName + " " + lastName; } }
+        public string FullName { get { return FirstName + " " + LastName; } }
 
     }
 }

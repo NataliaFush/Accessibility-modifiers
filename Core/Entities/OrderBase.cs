@@ -7,27 +7,17 @@ using System.Threading.Tasks;
 
 namespace Core.Entities
 {
-    public abstract class OrderBase : IOrderBase
+    public abstract class OrderBase : IOrder
     {
-        public int DeliveryId { get; set; }
-        public string DeliveryName { get; }
-        public int DeliveryPrice { get; set; }
-        protected readonly int _discountOver1000;
-        protected readonly int _discountOver2000;
-        protected readonly int _discountBithDay;
-
-        protected OrderBase(int discountOver1000, int discountOver2000, int discountBithDay, ICustomer customer)
-        {
-            _discountOver1000 = discountOver1000;
-            _discountOver2000 = discountOver2000;
-            _discountBithDay = discountBithDay;
-            Customer = customer;
-        }
-
-        public long FinalPrice;
         public int Id { get; set; }
+
+        public int DeliveryId { get; set; }
+        public Delivery Delivery { get; set; }
+
+        public List<Discount> Discounts { get; set; }
         public List<ItemBase> Items { get; set; }
-        public string CustomerId;
+
+        public int CustomerId { get; set; }
         public ICustomer Customer { get; set; }
         public DateTime CreateOrder { get; set; }
 
@@ -37,17 +27,16 @@ namespace Core.Entities
             {
                 if (Items != null && Items.Any())
                 {
-                    return Items.Sum(x => x.GetTotalPrice());
+                    return Items.Sum(x => x.Price);
                 }
                 else
                 {
                     return 0;
                 }
             }
+            
         }
 
-        public abstract int GetDiscount(double Price);
-        public abstract double GetTotalPrice();
-
+       
     }
 }
