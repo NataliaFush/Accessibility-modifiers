@@ -13,7 +13,7 @@ namespace Core.Entities
         {
         }
 
-        public ICollection<IOrder> Orders { get ; set ; }
+        public IEnumerable<IOrder> Orders { get ; set ; }
         public Address DeliveryAddress { get ; set; }
     }
 }

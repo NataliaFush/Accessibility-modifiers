@@ -9,7 +9,7 @@ namespace Core.Entities
 {
     internal class Admin : UserBase
     {
-        public Admin(string firstName, string lastName) : base(firstName, lastName, UserType.Admin)
+        public Admin() : base(UserType.Admin)
         {
 
         }

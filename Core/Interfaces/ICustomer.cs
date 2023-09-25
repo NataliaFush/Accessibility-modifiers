@@ -7,7 +7,7 @@ namespace Core
     public interface ICustomer
     {
         Address DeliveryAddress { get; set; }
-        ICollection<IOrder> Orders { get; set; }
+        IEnumerable<IOrder> Orders { get; set; }
         DateTime BirthDay { get; set; }
 
         int Id { get; set; }

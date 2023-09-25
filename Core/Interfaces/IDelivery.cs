@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Interfaces
 {
-    public class IDelivery
+    public interface IDelivery
     {
         public int Id { get; set; }
         public string Name { get; }

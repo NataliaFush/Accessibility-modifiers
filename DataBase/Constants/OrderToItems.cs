@@ -13,7 +13,7 @@ namespace DataBase.Constants
             new OrderItems {OrderId = 1, ItemId = 1},
             new OrderItems {OrderId = 1, ItemId = 2},
             new OrderItems {OrderId = 1, ItemId = 2},
-            new OrderItems {OrderId = 1, ItemId = 2},
+            new OrderItems {OrderId = 1, ItemId = 4},
             new OrderItems {OrderId = 2, ItemId = 5},
             new OrderItems {OrderId = 3, ItemId = 3},
             new OrderItems {OrderId = 3, ItemId = 5},

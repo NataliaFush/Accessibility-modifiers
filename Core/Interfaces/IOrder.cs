@@ -1,5 +1,6 @@
 ﻿
 using Core.Entities;
+using Core.Interfaces;
 
 namespace Core
 {
@@ -9,8 +10,8 @@ namespace Core
         int CustomerId { get; set; }
         int DeliveryId { get; set; }
         ICustomer Customer { get; set; }
-        Delivery Delivery { get; set; }
-        List<ItemBase> Items { get; set; }
+        IDelivery Delivery { get; set; }
+        List<IItem> Items { get; set; }
         double Price { get;  }
         DateTime CreateOrder { get; set; }
         List<Discount> Discounts { get; set; }
