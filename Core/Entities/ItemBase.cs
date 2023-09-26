@@ -1,4 +1,5 @@
 ﻿using Core.Enums;
+using Core.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +13,9 @@ namespace Core.Entities
         public int Id { get; set; }
         public string ItemName { get; set; }
         public ItemCategory Category { get; set; }
-        public uint Price { get; set; }
-        public List<Discount> Discounts { get; set; }
+        public double Price { get; set; }
+        public List<IDiscount> Discounts { get; set; }
         public string Unit { get; set; }
+        public abstract IItem Clone();
     }
 }

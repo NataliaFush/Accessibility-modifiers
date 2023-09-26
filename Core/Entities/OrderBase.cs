@@ -15,28 +15,11 @@ namespace Core.Entities
         public int DeliveryId { get; set; }
         public IDelivery Delivery { get; set; }
 
-        public List<Discount> Discounts { get; set; }
+        public List<IDiscount> Discounts { get; set; }
         public List<IItem> Items { get; set; }
         public int CustomerId { get; set; }
         public ICustomer Customer { get; set; }
         public DateTime CreateOrder { get; set; }
-
-        public double Price
-        {
-            get
-            {
-                if (Items != null && Items.Any())
-                {
-                    return Items.Sum(x => x.Price);
-                }
-                else
-                {
-                    return 0;
-                }
-            }
-            
-        }
-
-       
+        public double Price { get; set; }
     }
 }

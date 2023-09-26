@@ -16,6 +16,7 @@ namespace Core.Entities
         public DiscountType DiscountType { get; set; }
         public ItemCategory? Category { get; set; }
         public int? MinValue { get; set; }
+        public int? MaxValue { get; set; }
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
         public int? OrderId { get; set; }

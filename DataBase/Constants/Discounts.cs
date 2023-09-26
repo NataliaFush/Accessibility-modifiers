@@ -17,37 +17,36 @@ namespace DataBase.Constants
             new Discount()
             {
                 Id = 1,
-                DiscountType=DiscountType.Category,
+                DiscountType = DiscountType.Category,
                 Category = ItemCategory.Food,
-                Amount=3,
-                StartDate= DateTime.Now,
-                EndDate= DateTime.Now.AddDays(100),
-                Description=""
+                Amount = 3,
+                StartDate= new DateTime(2023, 10, 01),
+                EndDate= new DateTime(2023, 10, 08),
+                Description="Discount for currently catagory"
             },
 
             new Discount()
             {
                 Id = 2,
                 DiscountType=DiscountType.Item,
-                ItemId=3,
-                Amount=10,
+                ItemId = 3,
+                Amount = 10,
                 Description="Discount for currently items",
-
             },
 
             new Discount()
             {   Id = 3,
-                DiscountType=DiscountType.OrderPrice,
-                Amount=5,
-                MinValue=5000,
+                DiscountType = DiscountType.OrderPrice,
+                Amount = 5,
+                MinValue = 5000,
                 Description="Discount for orders up to 5000 price",
             },
 
             new Discount()
             {   Id = 4,
-                DiscountType=DiscountType.OrderPrice,
-                Amount=10,
-                MinValue=10000,
+                DiscountType = DiscountType.OrderPrice,
+                Amount = 10,
+                MinValue = 10000,
                 Description="Discount for orders up to 10000",
             },
 
@@ -57,29 +56,34 @@ namespace DataBase.Constants
                 Amount= 25,
                 Description="Black Friday discounts",
                 StartDate= new DateTime(2023, 11, 20),
-                EndDate= new DateTime(2023, 11, 20)
+                EndDate= new DateTime(2023, 11, 25)
             },
 
             new Discount()
             {   Id = 6,
-                DiscountType=DiscountType.ItemsCount,
-                Amount=10,
-                MinValue =3,
-                Description="Discount for orders up to 10000",
+                DiscountType = DiscountType.ItemsCount,
+                Amount = 10,
+                MinValue = 3,
+                Description="Discount for orders with 3 items",
+            },
+
+            new Discount()
+            {
+                Id = 7,
+                DiscountType = DiscountType.Date,
+                Amount = 3,
+                StartDate= new DateTime(2023, 9, 01),
+                EndDate= new DateTime(2023, 10, 08),
+                Description="Discount for date"
+            },
+            new Discount()
+            {
+                Id = 8,
+                DiscountType = DiscountType.Category,
+                Category = ItemCategory.Technics,
+                Amount = 2,
+                Description="Discount for currently catagory"
             }
-
-
-               
-    //    public int Value { get; set; }
-    //    public string Description { get; set; }
-    //    public DiscountType DiscountType { get; set; }
-    //    public ItemCategory Category { get; set; }
-    //    public int? MinCount { get; set; }
-    //    public DateTime? StartDate { get; set; }
-    //    public DateTime? EndDate { get; set; }
-    //    public int? OrderId { get; set; }
-    //    public int? ItelId { get; set; }
-    //}
         };
     }
 }

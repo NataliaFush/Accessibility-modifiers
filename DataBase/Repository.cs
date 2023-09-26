@@ -1,11 +1,12 @@
 ﻿using Core;
 using Core.Entities;
+using Core.Enums;
 using Core.Interfaces;
 using DataBase.Constants;
 
 namespace DataBase
 {
-    public class Repository
+    public class Repository : IRepository
     {
         public IOrder GetOrderById(int id)
         {
@@ -17,6 +18,49 @@ namespace DataBase
                 order.Items = GetPrivateItemsByOrderId(order.Id);
             }
             return order;
+        }
+
+        public List<IItem> GetItemsByOrderId(int id)
+        {
+            return GetPrivateItemsByOrderId(id);
+        }
+
+
+
+        public List<IDiscount> GetCurrentDateDiscounts()
+        {
+            var discounts = MyDbContext.Discounts;
+            var result = new List<IDiscount>();
+
+            foreach (var item in discounts)
+            {
+                if (item.StartDate.HasValue && item.EndDate.HasValue)
+                {
+                    if (item.StartDate <= DateTime.Now && item.EndDate >= DateTime.Now)
+                    {
+                        result.Add(item);
+                    }
+                }
+                else
+                {
+                    result.Add(item);
+                }
+            }
+
+            return result;
+        }
+
+
+        public double GetPriceByOrderId(int id)
+        {
+            double price = 0;
+            var orderItems = GetPrivateItemsByOrderId(id);
+            foreach (var item in orderItems)
+            {
+                price += item.Price;
+            }
+
+            return price;
         }
 
         private IOrder GetPrivateOrderById(int id)
@@ -43,8 +87,8 @@ namespace DataBase
                 }
             }
             return null;
-        } 
-        
+        }
+
         private ICustomer GetPrivateCustomerById(int id)
         {
             var customers = MyDbContext.Customers;
@@ -73,15 +117,13 @@ namespace DataBase
                     {
                         if (orderItem.ItemId == item.Id)
                         {
-                            resItems.Add(item);
+                            resItems.Add(item.Clone());
                         }
                     }
                 }
             }
             return resItems;
         }
-
-
 
         public ICustomer GetCustomerWithOrdersById(int id)
         {
@@ -100,7 +142,7 @@ namespace DataBase
                     }
                 }
                 customer.Orders = resOrders;
-                
+
             }
             return customer;
         }

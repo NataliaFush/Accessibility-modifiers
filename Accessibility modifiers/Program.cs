@@ -1,4 +1,5 @@
 ﻿using DataBase;
+using Service;
 
 namespace Program
 {
@@ -7,10 +8,16 @@ namespace Program
         static void Main()
         {
             var rep = new Repository();
+            var customerService = new CustomerService(rep);
+            var orderService = new OrderService(rep);
 
-            var order = rep.GetOrderById(1);
+            var order = orderService.GetOrderById(1);
+            orderService.SetDiscountsToOrder(order);
+            orderService.SetPriceToOrder(order);
 
-            var customer = rep.GetCustomerWithOrdersById(3);
+            var customer = customerService.GetCustomerWithOrdersById(2);
+            orderService.SetDiscountsToOrders(customer.Orders);
+            orderService.SetPriceToOrders(customer.Orders);
 
             Console.ReadLine();
 

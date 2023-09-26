@@ -35,7 +35,7 @@ namespace DataBase.Constants
             {
                 Id = 3,
                 ItemName = "Salmon Marinero",
-                Category = Core.Enums.ItemCategory.Food,
+                Category = ItemCategory.Food,
                 Price = 400
             },
 
@@ -43,16 +43,16 @@ namespace DataBase.Constants
             {
                 Id = 4,
                 ItemName = "Keyboard Tosiba",
-                Category = Core.Enums.ItemCategory.Technics,
-                Price = 39999
+                Category = ItemCategory.Technics,
+                Price = 400
             },
 
             new Item()
             {
                 Id = 5,
                 ItemName = "Wisky Jeck Daniels",
-                Category = Core.Enums.ItemCategory.Food,
-                Price = 8000
+                Category = ItemCategory.Food,
+                Price = 800
             }
         };
     }
