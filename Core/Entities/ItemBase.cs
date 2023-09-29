@@ -14,8 +14,28 @@ namespace Core.Entities
         public string ItemName { get; set; }
         public ItemCategory Category { get; set; }
         public double Price { get; set; }
-        public List<IDiscount> Discounts { get; set; }
-        public string Unit { get; set; }
+        public Dictionary<DiscountType, IDiscount> Discounts { get; set; }
+        public double TotalPrice
+        {
+            get
+            {
+                if (Discounts != null && Discounts.Count > 0)
+                {
+                    return Price - SumAllAmount(Discounts) * Price / 100;
+                }
+                return Price;
+            }
+        }
         public abstract IItem Clone();
+
+        private double SumAllAmount(IEnumerable<KeyValuePair<DiscountType, IDiscount>> discounts)
+        {
+            double sum = 0;
+            foreach (var discount in discounts)
+            {
+                sum += discount.Value.Amount;
+            }
+            return sum;
+        }
     }
 }

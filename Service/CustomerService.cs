@@ -12,9 +12,6 @@ namespace Service
             _repository = repository;
         }
 
-        public ICustomer GetCustomerWithOrdersById(int id)
-        {
-            return _repository.GetCustomerWithOrdersById(id);
-        }
+        
     }
 }

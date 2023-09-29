@@ -13,37 +13,38 @@ namespace DataBase
             var order = GetPrivateOrderById(id);
             if (order != null)
             {
-                order.Delivery = GetPrivateDeliveryById(order.DeliveryId);
-                order.Customer = GetPrivateCustomerById(order.CustomerId);
+                order.Customer = GetCustomerWithOrderById(order.CustomerId);
                 order.Items = GetPrivateItemsByOrderId(order.Id);
+                order.Delivery = GetPrivateDeliveryById(order.DeliveryId);
+                order.Discounts = new List<IDiscount>();
             }
             return order;
         }
 
-        public List<IItem> GetItemsByOrderId(int id)
+        private List<IItem> GetPrivateItemsByOrderId(int orderId)
         {
-            return GetPrivateItemsByOrderId(id);
-        }
+            var items = MyDbContext.Items;
+            var orderItems = MyDbContext.OrderItems;
+            var result = new List<IItem>();
 
-
-
-        public List<IDiscount> GetCurrentDateDiscounts()
-        {
-            var discounts = MyDbContext.Discounts;
-            var result = new List<IDiscount>();
-
-            foreach (var item in discounts)
+            foreach (var orderItem in orderItems)
             {
-                if (item.StartDate.HasValue && item.EndDate.HasValue)
+                if (orderItem.OrderId == orderId)
                 {
-                    if (item.StartDate <= DateTime.Now && item.EndDate >= DateTime.Now)
+                    foreach (var item in items)
                     {
-                        result.Add(item);
+                        if (orderItem.ItemId == item.Id)
+                        {
+                            result.Add(new Item()
+                            {
+                                Id = item.Id,
+                                Discounts = new Dictionary<DiscountType, IDiscount>(),
+                                Price = item.Price,
+                                Category = item.Category,
+                                ItemName = item.ItemName,
+                            });
+                        }
                     }
-                }
-                else
-                {
-                    result.Add(item);
                 }
             }
 
@@ -51,16 +52,72 @@ namespace DataBase
         }
 
 
-        public double GetPriceByOrderId(int id)
+        private IDelivery GetPrivateDeliveryById(int id)
         {
-            double price = 0;
-            var orderItems = GetPrivateItemsByOrderId(id);
-            foreach (var item in orderItems)
+            var deliverys = MyDbContext.Deliverys;
+            foreach (var delivery in deliverys)
             {
-                price += item.Price;
+                if (delivery.Id == id)
+                {
+                    return delivery;
+                }
             }
+            return null;
+        }
 
-            return price;
+        public ICustomer GetCustomerByOrderId(int id)
+        {
+            var orders = MyDbContext.Orders;
+            var customers = MyDbContext.Customers;
+            foreach (var order in orders)
+            {
+                foreach (var customer in customers)
+                {
+                    if (order.CustomerId == customer.Id && order.Id == id)
+                    {
+                        return customer;
+                    }
+                }
+            }
+            return null;
+        }
+
+
+
+        public List<IDiscount> GetAllDiscount()
+        {
+            var discounts = MyDbContext.Discounts;
+            var results = new List<IDiscount>();
+
+            foreach (var discount in discounts)
+            {
+                if (discount.StartDate.HasValue && discount.EndDate.HasValue)
+                {
+                    if (discount.StartDate <= DateTime.Now && discount.EndDate >= DateTime.Now)
+                    {
+                        results.Add(discount);
+                    }
+                }
+                else
+                {
+                    results.Add(discount);
+                }
+            }
+            return results;
+        }
+
+
+        private ICustomer GetPrivateCustomerById(int id)
+        {
+            var customers = MyDbContext.Customers;
+            foreach (var customer in customers)
+            {
+                if (customer.Id == id)
+                {
+                    return customer;
+                }
+            }
+            return null;
         }
 
         private IOrder GetPrivateOrderById(int id)
@@ -76,59 +133,13 @@ namespace DataBase
             return null;
         }
 
-        private IDelivery GetPrivateDeliveryById(int id)
+       
+
+        public ICustomer GetCustomerWithOrderById(int id)
         {
-            var deliverys = MyDbContext.Deliverys;
-            foreach (var delivery in deliverys)
-            {
-                if (delivery.Id == id)
-                {
-                    return delivery;
-                }
-            }
-            return null;
-        }
+            ICustomer result = GetPrivateCustomerById(id);
 
-        private ICustomer GetPrivateCustomerById(int id)
-        {
-            var customers = MyDbContext.Customers;
-            foreach (var customer in customers)
-            {
-                if (customer.Id == id)
-                {
-                    return customer;
-                }
-            }
-            return null;
-        }
-
-        private List<IItem> GetPrivateItemsByOrderId(int id)
-        {
-            var orderItems = MyDbContext.OrderItems;
-            var items = MyDbContext.Items;
-
-            List<IItem> resItems = new List<IItem>();
-
-            foreach (var orderItem in orderItems)
-            {
-                if (orderItem.OrderId == id)
-                {
-                    foreach (var item in items)
-                    {
-                        if (orderItem.ItemId == item.Id)
-                        {
-                            resItems.Add(item.Clone());
-                        }
-                    }
-                }
-            }
-            return resItems;
-        }
-
-        public ICustomer GetCustomerWithOrdersById(int id)
-        {
-            var customer = GetPrivateCustomerById(id);
-            if (customer != null)
+            if (result != null)
             {
                 var orders = MyDbContext.Orders;
 
@@ -136,15 +147,15 @@ namespace DataBase
 
                 foreach (var order in orders)
                 {
-                    if (order.CustomerId == customer.Id)
+                    if (order.CustomerId == result.Id)
                     {
-                        resOrders.Add(GetOrderById(order.Id));
+                        resOrders.Add(order);
                     }
                 }
-                customer.Orders = resOrders;
-
+                result.Orders = resOrders;
             }
-            return customer;
+
+            return result;
         }
     }
 }

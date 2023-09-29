@@ -1,5 +1,6 @@
 ﻿using Core;
 using Core.Entities;
+using Core.Entities.Discounts;
 using Core.Enums;
 using Core.Interfaces;
 using System;
@@ -14,75 +15,85 @@ namespace DataBase.Constants
     {
         public static IEnumerable<IDiscount> Discounts = new List<IDiscount>()
         {
-            new Discount()
+            new DiscountCategory()
             {
                 Id = 1,
-                DiscountType = DiscountType.Category,
-                Category = ItemCategory.Food,
+                ItemCategory = ItemCategory.Food,
                 Amount = 3,
-                StartDate= new DateTime(2023, 10, 01),
+                StartDate= new DateTime(2023, 8, 01),
                 EndDate= new DateTime(2023, 10, 08),
                 Description="Discount for currently catagory"
             },
-
-            new Discount()
+            new DiscountCategory()
+            {
+                Id = 12,
+                ItemCategory = ItemCategory.Technics,
+                Amount = 12,
+                StartDate= new DateTime(2023, 9, 01),
+                EndDate= new DateTime(2023, 10, 08),
+                Description="Discount for currently catagory"
+            },
+            new DiscountCategory()
+            {
+                Id = 11,
+                ItemCategory = ItemCategory.Technics,
+                Amount = 10,
+                StartDate= new DateTime(2023, 9, 01),
+                EndDate= new DateTime(2023, 10, 08),
+                Description="Discount for currently catagory"
+            },
+            new DiscountItem()
             {
                 Id = 2,
-                DiscountType=DiscountType.Item,
                 ItemId = 3,
                 Amount = 10,
                 Description="Discount for currently items",
             },
 
-            new Discount()
+            new DiscountOrderPrice()
             {   Id = 3,
-                DiscountType = DiscountType.OrderPrice,
                 Amount = 5,
-                MinValue = 5000,
+                MinPrice = 5000,
                 Description="Discount for orders up to 5000 price",
+                IsAdditionalDiscount = true,
             },
 
-            new Discount()
+            new DiscountOrderPrice()
             {   Id = 4,
-                DiscountType = DiscountType.OrderPrice,
                 Amount = 10,
-                MinValue = 10000,
+                MinPrice = 10000,
                 Description="Discount for orders up to 10000",
+                IsAdditionalDiscount = true
             },
 
-            new Discount()
+            new DiscountSelebrate()
             {   Id = 5,
-                DiscountType=DiscountType.Selebrate,
                 Amount= 25,
                 Description="Black Friday discounts",
-                StartDate= new DateTime(2023, 11, 20),
-                EndDate= new DateTime(2023, 11, 25)
+                StartDate= new DateTime(2023, 8, 20),
+                EndDate= new DateTime(2023, 11, 25),
             },
-
-            new Discount()
-            {   Id = 6,
-                DiscountType = DiscountType.ItemsCount,
+            new DiscountItemsCount()
+            {   Id = 66,
                 Amount = 10,
-                MinValue = 3,
-                Description="Discount for orders with 3 items",
+                ItemCount  = 5,
+                Description="Discount for orders with 5 items",
+                IsAdditionalDiscount = true
             },
-
-            new Discount()
+            new DiscountItemsCount()
+            {   Id = 6,
+                Amount = 5,
+                ItemCount  = 3,
+                Description="Discount for orders with 3 items",
+                IsAdditionalDiscount = true
+            },
+            new DiscountDate()
             {
                 Id = 7,
-                DiscountType = DiscountType.Date,
                 Amount = 3,
                 StartDate= new DateTime(2023, 9, 01),
                 EndDate= new DateTime(2023, 10, 08),
-                Description="Discount for date"
-            },
-            new Discount()
-            {
-                Id = 8,
-                DiscountType = DiscountType.Category,
-                Category = ItemCategory.Technics,
-                Amount = 2,
-                Description="Discount for currently catagory"
+                Description="Discount for date",
             }
         };
     }

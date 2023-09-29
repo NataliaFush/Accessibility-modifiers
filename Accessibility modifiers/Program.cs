@@ -1,5 +1,6 @@
 ﻿using DataBase;
 using Service;
+using System;
 
 namespace Program
 {
@@ -11,15 +12,11 @@ namespace Program
             var customerService = new CustomerService(rep);
             var orderService = new OrderService(rep);
 
+
+
             var order = orderService.GetOrderById(1);
-            orderService.SetDiscountsToOrder(order);
-            orderService.SetPriceToOrder(order);
-
-            var customer = customerService.GetCustomerWithOrdersById(2);
-            orderService.SetDiscountsToOrders(customer.Orders);
-            orderService.SetPriceToOrders(customer.Orders);
-
-            Console.ReadLine();
+            var order2 = orderService.GetOrderById(2);
+            var order3 = orderService.GetOrderById(3);
 
         }
     }

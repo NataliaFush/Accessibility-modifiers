@@ -1,4 +1,5 @@
-﻿using Core.Interfaces;
+﻿using Core.Enums;
+using Core.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,11 +15,10 @@ namespace Core.Entities
             return new Item()
             {
                 Category = Category,
-                Discounts = Discounts != null? new List<IDiscount>(Discounts) : new List<IDiscount>(),
+                Discounts = Discounts != null? new Dictionary<DiscountType, IDiscount>(Discounts) : new Dictionary<DiscountType, IDiscount>(),
                 Id = Id,
                 ItemName = ItemName,
-                Price = Price,
-                Unit = Unit != null ? new string(Unit) : string.Empty,
+                Price = Price
             };
         }
     }

@@ -8,9 +8,10 @@ namespace Core.Interfaces
 {
     public interface IRepository
     {
+        List<IDiscount> GetAllDiscount();
+        ICustomer GetCustomerByOrderId(int id);
+        ICustomer GetCustomerWithOrderById(int id);
         IOrder GetOrderById(int id);
-        ICustomer GetCustomerWithOrdersById(int id);
-        List<IItem> GetItemsByOrderId(int id);
-        List<IDiscount> GetCurrentDateDiscounts();
+
     }
 }

@@ -6,13 +6,14 @@ namespace Core.Interfaces
     {
         public int Id { get; set; }
         string Description { get; set; }
-        DiscountType DiscountType { get; set; }
-        ItemCategory? Category { get; set; }
-        DateTime? EndDate { get; set; }
-        int? ItemId { get; set; }
-        int? MinValue { get; set; }
-        int? OrderId { get; set; }
+        public DiscountType DiscountType { get; }
         DateTime? StartDate { get; set; }
+        DateTime? EndDate { get; set; }
         int Amount { get; set; }
+        bool IsOrderDiscount { get; set; }
+        bool IsAdditionalDiscount { get; set; }
+        void SetDiscount(IOrder order);
     }
+
+   
 }

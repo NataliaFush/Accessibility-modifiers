@@ -12,8 +12,9 @@ namespace Core
         ICustomer Customer { get; set; }
         IDelivery Delivery { get; set; }
         List<IItem> Items { get; set; }
-        double Price { get; set; }
+        double Price { get; }
         DateTime CreateOrder { get; set; }
         List<IDiscount> Discounts { get; set; }
+        public double TotalPrice { get; }
     }
 }
