@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Core.Entities.Discounts
 {
-    public class DiscountItem : DiscountBase
+    public class DiscountItem : DiscountBase<int>
     {
         public int ItemId { get; set; }
         public DiscountItem()
@@ -15,18 +15,16 @@ namespace Core.Entities.Discounts
             DiscountType = Enums.DiscountType.Item;
         }
 
-        public override void SetDiscount(IOrder order)
+        public override bool IsApplyDiscountForItem(IOrder order, IItem item)
         {
             if (order != null && order.Items != null && order.Items.Count > 0)
             {
-                foreach (var item in order.Items)
+                if (item.Id == ItemId)
                 {
-                    if (item.Id == ItemId)
-                    {
-                        AddDiscountToItem(item);
-                    }
+                    return true;
                 }
             }
+            return false;
         }
     }
 }

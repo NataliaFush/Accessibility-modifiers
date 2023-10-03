@@ -1,10 +1,11 @@
-﻿using Core.Enums;
+﻿using Core.Entities;
+using Core.Enums;
 
 namespace Core.Interfaces
 {
-    public interface IDiscount
+    public interface IDiscount<T>
     {
-        public int Id { get; set; }
+        public T Id { get; set; }
         string Description { get; set; }
         public DiscountType DiscountType { get; }
         DateTime? StartDate { get; set; }
@@ -12,7 +13,8 @@ namespace Core.Interfaces
         int Amount { get; set; }
         bool IsOrderDiscount { get; set; }
         bool IsAdditionalDiscount { get; set; }
-        void SetDiscount(IOrder order);
+        bool IsApplyDiscountForOrder(IOrder order);
+        bool IsApplyDiscountForItem(IOrder order, IItem item);
     }
 
    

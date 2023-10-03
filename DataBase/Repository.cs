@@ -16,7 +16,7 @@ namespace DataBase
                 order.Customer = GetCustomerWithOrderById(order.CustomerId);
                 order.Items = GetPrivateItemsByOrderId(order.Id);
                 order.Delivery = GetPrivateDeliveryById(order.DeliveryId);
-                order.Discounts = new List<IDiscount>();
+                order.Discounts = new List<IDiscount<int>>();
             }
             return order;
         }
@@ -38,7 +38,7 @@ namespace DataBase
                             result.Add(new Item()
                             {
                                 Id = item.Id,
-                                Discounts = new Dictionary<DiscountType, IDiscount>(),
+                                Discounts = new Dictionary<DiscountType, IDiscount<int>>(),
                                 Price = item.Price,
                                 Category = item.Category,
                                 ItemName = item.ItemName,
@@ -84,10 +84,10 @@ namespace DataBase
 
 
 
-        public List<IDiscount> GetAllDiscount()
+        public List<IDiscount<int>> GetAllDiscount()
         {
             var discounts = MyDbContext.Discounts;
-            var results = new List<IDiscount>();
+            var results = new List<IDiscount<int>   >();
 
             foreach (var discount in discounts)
             {

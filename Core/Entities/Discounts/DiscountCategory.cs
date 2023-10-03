@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Core.Entities.Discounts
 {
-    public class DiscountCategory : DiscountBase
+    public class DiscountCategory : DiscountBase<int>
     {
         public ItemCategory ItemCategory { get; set; }
         public DiscountCategory()
@@ -16,18 +16,16 @@ namespace Core.Entities.Discounts
             DiscountType = DiscountType.Category;
         }
 
-        public override void SetDiscount(IOrder order)
+        public override bool IsApplyDiscountForItem(IOrder order, IItem item)
         {
             if (order != null && order.Items != null && order.Items.Count > 0)
             {
-                foreach (var item in order.Items)
+                if (item.Category == this.ItemCategory)
                 {
-                    if (item.Category == this.ItemCategory)
-                    {
-                        AddDiscountToItem(item);
-                    }
+                    return true;
                 }
             }
+            return false;
         }
     }
 }

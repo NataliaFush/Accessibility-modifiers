@@ -14,7 +14,8 @@ namespace Core
         List<IItem> Items { get; set; }
         double Price { get; }
         DateTime CreateOrder { get; set; }
-        List<IDiscount> Discounts { get; set; }
-        public double TotalPrice { get; }
+        List<IDiscount<int>> Discounts { get; set; }
+        double TotalPrice { get; }
+        void SetDiscounts(IEnumerable<IDiscount<int>> discounts);
     }
 }

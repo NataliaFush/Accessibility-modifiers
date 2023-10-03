@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Core.Entities.Discounts
 {
-    public class DiscountDate : DiscountBase
+    public class DiscountDate : DiscountBase<int>
     {
         public DiscountDate()
         {
@@ -13,7 +13,7 @@ namespace Core.Entities.Discounts
             IsOrderDiscount = true;
         }
 
-        public override void SetDiscount(IOrder order)
+        public override bool IsApplyDiscountForOrder(IOrder order)
         {
             if (order != null)
             {
@@ -25,31 +25,32 @@ namespace Core.Entities.Discounts
                         if (dis.Amount < this.Amount)
                         {
                             order.Discounts.Remove(dis);
-                            order.Discounts.Add(this);
+                            return true;
                         }
                     }
                     else
                     {
-                        order.Discounts.Add(this);
+                        return true;
                     }
                 }
                 else
                 {
                     if (!order.Discounts.Any(x => !x.IsAdditionalDiscount))
                     {
-                        order.Discounts.Add(this);
+                        return true;
                     }
                     else
                     {
                         if (order.Discounts.Any(x => !x.IsAdditionalDiscount && x.Amount < this.Amount))
                         {
                             order.Discounts.RemoveAll(x => !x.IsAdditionalDiscount);
-                            order.Discounts.Add(this);
+                            return true;
                         }
                     }
                 }
 
             }
+            return false;
         }
     }
 }

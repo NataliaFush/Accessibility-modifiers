@@ -13,7 +13,7 @@ namespace DataBase.Constants
 {
     internal partial class MyDbContext
     {
-        public static IEnumerable<IDiscount> Discounts = new List<IDiscount>()
+        public static IEnumerable<IDiscount<int>> Discounts = new List<IDiscount<int>>()
         {
             new DiscountCategory()
             {
@@ -51,7 +51,8 @@ namespace DataBase.Constants
             },
 
             new DiscountOrderPrice()
-            {   Id = 3,
+            {   
+                Id = 3,
                 Amount = 5,
                 MinPrice = 5000,
                 Description="Discount for orders up to 5000 price",
@@ -59,7 +60,8 @@ namespace DataBase.Constants
             },
 
             new DiscountOrderPrice()
-            {   Id = 4,
+            {   
+                Id = 4,
                 Amount = 10,
                 MinPrice = 10000,
                 Description="Discount for orders up to 10000",
@@ -67,24 +69,35 @@ namespace DataBase.Constants
             },
 
             new DiscountSelebrate()
-            {   Id = 5,
+            {   
+                Id = 5,
                 Amount= 25,
                 Description="Black Friday discounts",
                 StartDate= new DateTime(2023, 8, 20),
                 EndDate= new DateTime(2023, 11, 25),
             },
             new DiscountItemsCount()
-            {   Id = 66,
+            {   
+                Id = 66,
                 Amount = 10,
                 ItemCount  = 5,
                 Description="Discount for orders with 5 items",
                 IsAdditionalDiscount = true
             },
             new DiscountItemsCount()
-            {   Id = 6,
+            {   
+                Id = 6,
                 Amount = 5,
                 ItemCount  = 3,
                 Description="Discount for orders with 3 items",
+                IsAdditionalDiscount = true
+            },
+            new DiscountItemsCount()
+            {   
+                Id = 12,
+                Amount = 12,
+                ItemCount  = 7,
+                Description="Discount for orders with 7 items",
                 IsAdditionalDiscount = true
             },
             new DiscountDate()

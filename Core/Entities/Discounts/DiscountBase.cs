@@ -3,9 +3,9 @@ using Core.Interfaces;
 
 namespace Core.Entities.Discounts
 {
-    public abstract class DiscountBase : IDiscount
+    public abstract class DiscountBase<T> : IDiscount<T>
     {
-        public int Id { get; set; }
+        public T Id { get; set; }
         public DiscountType DiscountType { get; protected set; }
         public string Description { get; set; }
         public int Amount { get; set; }
@@ -14,21 +14,14 @@ namespace Core.Entities.Discounts
         public bool IsAdditionalDiscount { get; set; }
         public bool IsOrderDiscount { get; set; }
 
-        public virtual void SetDiscount(IOrder order)
+        public virtual bool IsApplyDiscountForOrder(IOrder order)
         {
-           
+            return false;
         }
 
-        protected void AddDiscountToItem(IItem item)
+        public virtual bool IsApplyDiscountForItem(IOrder order, IItem item)
         {
-            if (item.Discounts.ContainsKey(this.DiscountType) && item.Discounts[this.DiscountType].Amount < this.Amount)
-            {
-                item.Discounts[this.DiscountType] = this;
-            }
-            else if (!item.Discounts.ContainsKey(this.DiscountType))
-            {
-                item.Discounts.Add(this.DiscountType, this);
-            }
+            return false;
         }
     }
 }

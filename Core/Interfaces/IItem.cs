@@ -6,7 +6,7 @@ namespace Core
 {
     public interface IItem
     {
-        Dictionary<DiscountType, IDiscount> Discounts { get; set; }
+        Dictionary<DiscountType, IDiscount<int>> Discounts { get; set; }
         int Id { get; set; }
         string ItemName { get; set; }
         double Price { get; set; }

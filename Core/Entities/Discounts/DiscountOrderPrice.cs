@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Entities.Discounts
 {
-    public class DiscountOrderPrice : DiscountBase
+    public class DiscountOrderPrice : DiscountBase<int>
     {
         public double MinPrice { get; set; }
         public DiscountOrderPrice()
@@ -15,7 +15,7 @@ namespace Core.Entities.Discounts
             IsOrderDiscount = true;
         }
 
-        public override void SetDiscount(IOrder order)
+        public override bool IsApplyDiscountForOrder(IOrder order)
         {
             if (order != null)
             {
@@ -30,12 +30,12 @@ namespace Core.Entities.Discounts
                             if (dis.Amount < this.Amount)
                             {
                                 order.Discounts.Remove(dis);
-                                order.Discounts.Add(this);
+                                return true;
                             }
                         }
                         else
                         {
-                            order.Discounts.Add(this);
+                            return true;
                         }
                     }
                 }
@@ -43,18 +43,19 @@ namespace Core.Entities.Discounts
                 {
                     if (!order.Discounts.Any(x => !x.IsAdditionalDiscount))
                     {
-                        order.Discounts.Add(this);
+                        return true;
                     }
                     else
                     {
                         if (order.Discounts.Any(x => !x.IsAdditionalDiscount && x.Amount < this.Amount))
                         {
                             order.Discounts.RemoveAll(x => !x.IsAdditionalDiscount);
-                            order.Discounts.Add(this);
+                            return true;
                         }
                     }
                 }
             }
+            return false;
         }
 
     }

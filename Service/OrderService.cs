@@ -25,18 +25,9 @@ namespace Service
         {
             var order = _repository.GetOrderById(id);
             
-            ApplyDiscounts(order);
+            order.SetDiscounts(_repository.GetAllDiscount().OrderBy(x => x.IsOrderDiscount));
+
             return order;
-        }
-
-        private void ApplyDiscounts(IOrder order)
-        {
-            var discountList = _repository.GetAllDiscount().OrderBy(x => x.IsOrderDiscount);
-
-            foreach (var discount in discountList)
-            {
-                discount.SetDiscount(order);
-            }
         }
     }
 }

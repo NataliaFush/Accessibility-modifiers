@@ -15,7 +15,7 @@ namespace Core.Entities
             return new Item()
             {
                 Category = Category,
-                Discounts = Discounts != null? new Dictionary<DiscountType, IDiscount>(Discounts) : new Dictionary<DiscountType, IDiscount>(),
+                Discounts = Discounts != null? new Dictionary<DiscountType, IDiscount<int>>(Discounts) : new Dictionary<DiscountType, IDiscount<int>>(),
                 Id = Id,
                 ItemName = ItemName,
                 Price = Price

@@ -15,7 +15,7 @@ namespace Core.Entities
         public int DeliveryId { get; set; }
         public IDelivery Delivery { get; set; }
 
-        public List<IDiscount> Discounts { get; set; }
+        public List<IDiscount<int>> Discounts { get; set; }
         public List<IItem> Items { get; set; }
         public int CustomerId { get; set; }
         public ICustomer Customer { get; set; }
@@ -31,9 +31,10 @@ namespace Core.Entities
         {
             get
             {
-                return Price - Sum<IDiscount>(Get1, Discounts) * Price / 100;
+                return Price - Sum<IDiscount<int>>(Get1, Discounts) * Price / 100;
             }
         }
+
 
         public double Sum<T>(Func<T, double> GetElement, IEnumerable<T> items)
         {
@@ -45,14 +46,39 @@ namespace Core.Entities
             return sum;
         }
 
-        private double Get1 (IDiscount discount)
+        private double Get1 (IDiscount<int> discount)
         {
             return discount.Amount;
         }
 
+        public void SetDiscounts(IEnumerable<IDiscount<int>> discounts)
+        {
+            foreach (var discount in discounts)
+            {
+                if (discount.IsOrderDiscount)
+                {
+                    if (discount.IsApplyDiscountForOrder(this)) Discounts.Add(discount);
+                }
+                else
+                {
+                    foreach (var item in Items)
+                    {
+                        if (discount.IsApplyDiscountForItem(this, item)) AddDiscountToItem(item, discount);
+                    }
+                }
+            }
+        }
 
-        
-        //public abstract U Foo<T, U>(T item);
-
+        protected void AddDiscountToItem(IItem item, IDiscount<int> discount)
+        {
+            if (item.Discounts.ContainsKey(discount.DiscountType) && item.Discounts[discount.DiscountType].Amount < discount.Amount)
+            {
+                item.Discounts[discount.DiscountType] = discount;
+            }
+            else if (!item.Discounts.ContainsKey(discount.DiscountType))
+            {
+                item.Discounts.Add(discount.DiscountType, discount);
+            }
+        }
     }
 }
