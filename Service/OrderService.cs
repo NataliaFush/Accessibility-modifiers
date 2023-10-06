@@ -29,5 +29,10 @@ namespace Service
 
             return order;
         }
+
+        public IItem GetItemById(int id)
+        {
+            return _repository.GetItemById(id);
+        }
     }
 }

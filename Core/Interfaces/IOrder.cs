@@ -6,6 +6,7 @@ namespace Core
 {
     public interface IOrder
     {
+        public event MyDel EventAddItem;
         int Id { get; set; }
         int CustomerId { get; set; }
         int DeliveryId { get; set; }
@@ -17,5 +18,6 @@ namespace Core
         List<IDiscount<int>> Discounts { get; set; }
         double TotalPrice { get; }
         void SetDiscounts(IEnumerable<IDiscount<int>> discounts);
+        public void AddItem(IItem item);
     }
 }

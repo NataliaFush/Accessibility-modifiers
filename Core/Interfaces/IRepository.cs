@@ -12,6 +12,6 @@ namespace Core.Interfaces
         ICustomer GetCustomerByOrderId(int id);
         ICustomer GetCustomerWithOrderById(int id);
         IOrder GetOrderById(int id);
-
+        IItem GetItemById(int id);
     }
 }

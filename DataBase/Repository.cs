@@ -51,7 +51,26 @@ namespace DataBase
             return result;
         }
 
+        public IItem GetItemById(int id)
+        {
+            var items = MyDbContext.Items;
+            foreach (var item in items)
+            {
+                if (item.Id == id)
+                {
+                    return (new Item()
+                    {
+                        Id = item.Id,
+                        Discounts = new Dictionary<DiscountType, IDiscount<int>>(),
+                        Price = item.Price,
+                        Category = item.Category,
+                        ItemName = item.ItemName,
+                    });
+                }
 
+            }
+            return null;
+        }
         private IDelivery GetPrivateDeliveryById(int id)
         {
             var deliverys = MyDbContext.Deliverys;
